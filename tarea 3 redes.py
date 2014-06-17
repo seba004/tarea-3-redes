@@ -1,15 +1,5 @@
-#-------------------------------------------------------------------------------
-# Name:        module1
-# Purpose:
-#
-# Author:      seba
-#
-# Created:     15-06-2014
-# Copyright:   (c) seba 2014
-# Licence:     <your licence>
-#-------------------------------------------------------------------------------
 
-grafo_tarea=[['a','b',1],['a','g',4],['a','i',10],['b','c',9],['b','a',1],['b','e',8],['c','b',9],['c','d',2],['d','f',4],['d','e',9],['d','i',2],['e','b',8],['e','f',2],['e','i',1],['f','d',4],['f','e',2],['f','h',6],['g','a',4],['g','h',7],['h','g',7],['h','f',6],['h','i',3],['i','h',3],['i','e',1],['i','d',2],['i','a',10]]
+grafo_tarea=[['a','b',1],['a','g',4],['a','i',10],['b','c',9],['b','a',1],['b','e',8],['c','b',9],['c','d',2],['d','c',2],['d','f',4],['d','e',9],['d','i',2],['e','b',8],['e','f',2],['e','d',9],['e','i',1],['f','d',4],['f','e',2],['f','h',6],['g','a',4],['g','h',7],['h','g',7],['h','f',6],['h','i',3],['i','h',3],['i','e',1],['i','d',2],['i','a',10]]
 
 lista_nodos=['a','b','c','d','e','f','g','h','i']
 
@@ -21,15 +11,15 @@ class nodo ():
     def __init__(self, nombre):
         self.nombre=nombre
 
-        self.conexion1=[self.nombre,'a',None]
-        self.conexion2=[self.nombre,'b',None]
-        self.conexion3=[self.nombre,'c',None]
-        self.conexion4=[self.nombre,'d',None]
-        self.conexion5=[self.nombre,'e',None]
-        self.conexion6=[self.nombre,'f',None]
-        self.conexion7=[self.nombre,'g',None]
-        self.conexion8=[self.nombre,'h',None]
-        self.conexion9=[self.nombre,'i',None]
+        self.conexion1=[self.nombre,'a',0]
+        self.conexion2=[self.nombre,'b',0]
+        self.conexion3=[self.nombre,'c',0]
+        self.conexion4=[self.nombre,'d',0]
+        self.conexion5=[self.nombre,'e',0]
+        self.conexion6=[self.nombre,'f',0]
+        self.conexion7=[self.nombre,'g',0]
+        self.conexion8=[self.nombre,'h',0]
+        self.conexion9=[self.nombre,'i',0]
 
 
 nodoa=nodo(lista_nodos[0])
@@ -44,19 +34,12 @@ nodoi=nodo(lista_nodos[8])
 
 
 def primera_asiganacion(nodo):
-    for i in range(0,26):
+    for i in range(0,28):
         primer=grafo_tarea[i]#se asigna las sublista del grafo
         n_salida=primer[0]#se obtiene el nodo de salida
 
         if n_salida==nodo.nombre:#se iguala nodao salida grafo con nodo de tabla
             n_llegada=primer[1]#se obtien numero de llegada
-
-
-            print("nombre nodo:")
-            print(nodo.nombre)
-            print("salida grafo")
-            print(n_salida)
-            print("gain")
 
 
             vector_tabla_a=nodo.conexion1#se obtiene vecor de a
@@ -107,8 +90,38 @@ def primera_iteracion ():
     primera_asiganacion(nodoi)
 
 
+def obtener_lista_conexion(nodo):
+    lista_conexiones=[]
+    lista_conexiones.append(nodo.conexion1)
+    lista_conexiones.append(nodo.conexion2)
+    lista_conexiones.append(nodo.conexion3)
+    lista_conexiones.append(nodo.conexion4)
+    lista_conexiones.append(nodo.conexion5)
+    lista_conexiones.append(nodo.conexion6)
+    lista_conexiones.append(nodo.conexion7)
+    lista_conexiones.append(nodo.conexion8)
+    lista_conexiones.append(nodo.conexion9)
+    return lista_conexiones
 
+def compartir(nodo,nodo2):#nodo= nodo que recbe tabla  y nodo2 el nodo que envia tabla
+    lista_conexion_nodo_local=obtener_lista_conexion(nodo)
 
+    lista_recividos=obtener_lista_conexion(nodo2)
+    comp=compatibilidad(lista_conexion_nodo_local[0],lista_recividos[0])
+    #todo ok
+    if comp == True:
+        for i in range(0,9):
+            for j in range(0,9):
+                seccion_local_elegido=lista_conexion_nodo_local[i]
+
+                seccion_visita_elegido=lista_recividos[j]
+                #bien
+                if seccion_local_elegido[1]==seccion_visita_elegido[0] and seccion_local_elegido[2]!=0 and seccion_visita_elegido[2]!=0:
+                    if seccion_local_elegido[0]!=seccion_visita_elegido[1]:
+                        suma_puntos=seccion_local_elegido[2]+seccion_visita_elegido[2]
+                        check=comprobar_peso(nodo,seccion_visita_elegido[1],suma_puntos)
+                        if check==True:
+                            cambiar_valor(nodo,seccion_visita_elegido[1],suma_puntos)
 
 
 
