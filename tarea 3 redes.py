@@ -1,4 +1,5 @@
 
+
 grafo_tarea=[['a','b',1],['a','g',4],['a','i',10],['b','c',9],['b','a',1],['b','e',8],['c','b',9],['c','d',2],['d','c',2],['d','f',4],['d','e',9],['d','i',2],['e','b',8],['e','f',2],['e','d',9],['e','i',1],['f','d',4],['f','e',2],['f','h',6],['g','a',4],['g','h',7],['h','g',7],['h','f',6],['h','i',3],['i','h',3],['i','e',1],['i','d',2],['i','a',10]]
 
 lista_nodos=['a','b','c','d','e','f','g','h','i']
@@ -88,7 +89,7 @@ def primera_iteracion ():
     primera_asiganacion(nodog)
     primera_asiganacion(nodoh)
     primera_asiganacion(nodoi)
-#nuevo------------------------------------------------
+
 
 def obtener_lista_conexion(nodo):
     lista_conexiones=[]
@@ -155,14 +156,14 @@ def compartir(nodo,nodo2):#nodo= nodo que recbe tabla  y nodo2 el nodo que envia
 
     lista_recividos=obtener_lista_conexion(nodo2)
     comp=compatibilidad(lista_conexion_nodo_local[0],lista_recividos[0])
-    #todo ok
+
     if comp == True:
         for i in range(0,9):
             for j in range(0,9):
                 seccion_local_elegido=lista_conexion_nodo_local[i]
 
                 seccion_visita_elegido=lista_recividos[j]
-                #bien
+
                 if seccion_local_elegido[1]==seccion_visita_elegido[0] and seccion_local_elegido[2]!=0 and seccion_visita_elegido[2]!=0:
                     if seccion_local_elegido[0]!=seccion_visita_elegido[1]:
                         suma_puntos=seccion_local_elegido[2]+seccion_visita_elegido[2]
@@ -211,7 +212,36 @@ def algoritmo():
     compartir(nodoi,nodoe)
     compartir(nodoi,nodoh)
 
+def impresion(nodo):
+    lista_a=obtener_lista_conexion(nodo)
+    fichero =open('routers.txt','a')
+    fichero.write("\n")
+    fichero.write("----------------|\n")
+    fichero.write('Nodo '+ nodo.nombre+'\t\t|\n')
+    fichero.write("----------------|\n")
+    for i in range(0,9):
+        sublista_a=lista_a[i]
+        fichero.write(sublista_a[0])
+        fichero.write(" -> ")
+        fichero.write(sublista_a[1])
+        fichero.write(" = ")
+        fichero.write(str(sublista_a[2])+"\t|\n")
+    fichero.write("----------------|\n")
+
+    fichero.close()
 
 primera_iteracion()
 for i in range (0,7):
     algoritmo()
+
+
+impresion(nodoa)
+impresion(nodob)
+impresion(nodoc)
+impresion(nodod)
+impresion(nodoe)
+impresion(nodof)
+impresion(nodog)
+impresion(nodoh)
+impresion(nodoi)
+
