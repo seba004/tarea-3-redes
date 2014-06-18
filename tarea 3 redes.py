@@ -88,7 +88,7 @@ def primera_iteracion ():
     primera_asiganacion(nodog)
     primera_asiganacion(nodoh)
     primera_asiganacion(nodoi)
-
+#nuevo------------------------------------------------
 
 def obtener_lista_conexion(nodo):
     lista_conexiones=[]
@@ -102,6 +102,53 @@ def obtener_lista_conexion(nodo):
     lista_conexiones.append(nodo.conexion8)
     lista_conexiones.append(nodo.conexion9)
     return lista_conexiones
+
+
+def compatibilidad (lista1, lista2):
+    if lista1[0]==lista2[0]:
+        return False
+    else:
+        return True
+
+def comprobar_peso(nodo,punto_final,suma):
+    lista_nodal=obtener_lista_conexion(nodo)
+    for i in range(0,9):
+        lista_seleccionada=lista_nodal[i]
+        if lista_seleccionada[1]==punto_final:
+            suma_encontrada=lista_seleccionada[2]
+            if suma_encontrada ==0:
+                return True
+            if suma_encontrada > suma :
+                return True
+            else:
+                return False
+
+def cambiar_valor(nodo, punto_final,suma):
+    lista_nodal=obtener_lista_conexion(nodo)
+    contador=1
+    for i in range(0,9):
+        lista_seleccionada=lista_nodal[i]
+        if lista_seleccionada[1]==punto_final:
+            if contador==1:
+                nodo.conexion1[2]=suma
+            if contador==2:
+                nodo.conexion2[2]=suma
+            if contador==3:
+                nodo.conexion3[2]=suma
+            if contador==4:
+                nodo.conexion4[2]=suma
+            if contador==5:
+                nodo.conexion5[2]=suma
+            if contador==6:
+                nodo.conexion6[2]=suma
+            if contador==7:
+                nodo.conexion7[2]=suma
+            if contador==8:
+                nodo.conexion8[2]=suma
+            if contador==9:
+                nodo.conexion9[2]=suma
+
+        contador=contador+1
 
 def compartir(nodo,nodo2):#nodo= nodo que recbe tabla  y nodo2 el nodo que envia tabla
     lista_conexion_nodo_local=obtener_lista_conexion(nodo)
@@ -125,3 +172,46 @@ def compartir(nodo,nodo2):#nodo= nodo que recbe tabla  y nodo2 el nodo que envia
 
 
 
+
+
+def algoritmo():
+    compartir(nodoa,nodoi)
+    compartir(nodoa,nodob)
+    compartir(nodoa,nodog)
+
+    compartir(nodob,nodoc)
+    compartir(nodob,nodoa)
+    compartir(nodob,nodoe)
+
+    compartir(nodoc,nodod)
+    compartir(nodoc,nodob)
+
+    compartir(nodod,nodoi)
+    compartir(nodod,nodoe)
+    compartir(nodod,nodof)
+
+    compartir(nodoe,nodoi)
+    compartir(nodoe,nodod)
+    compartir(nodoe,nodob)
+    compartir(nodoe,nodof)
+
+    compartir(nodof,nodod)
+    compartir(nodof,nodoe)
+    compartir(nodof,nodoh)
+
+    compartir(nodog,nodoa)
+    compartir(nodog,nodoh)
+
+    compartir(nodoh,nodog)
+    compartir(nodoh,nodoi)
+    compartir(nodoh,nodof)
+
+    compartir(nodoi,nodoa)
+    compartir(nodoi,nodod)
+    compartir(nodoi,nodoe)
+    compartir(nodoi,nodoh)
+
+
+primera_iteracion()
+for i in range (0,7):
+    algoritmo()
