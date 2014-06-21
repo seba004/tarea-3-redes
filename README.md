@@ -15,3 +15,8 @@ los códigos de las preguntas  restantes están en python.
 
 La pregunta 2 posee el nombre de  tarea 3 redes. py   y genera el achivo routers.txt  en el cual se encuentra el resultado  de la pregunta 
 La pregunta 3  esta bien  nombrada y su archivo de salida se llama routers_preg2.txt
+
+Para la pregunta 3  se creo  un nuevo grafo y se realizo el algortimo desde el incio
+
+Para la pregunta 3  se creó  un nuevo grafo y se realizó el algoritmo desde el inicio  ya que si se modifica  matriz   las tablas nunca iban a cambiar puesto que el nuevo camino siempre iba a ser mayor por lo que se hubiera mantenido el camino del  segmento cortado.
+El único modo de solucionar este problema  es estar periódicamente preguntando  acerca de los nodos activos y de sus enlaces disponibles   de modo  que cuando  un enlace o nodo falle  todos los  caminos que pasaban por este enlace o nodo cambiarán su valor a infinito y se crearán nuevas rutas de acuerdo  a las modificaciones en la red.
